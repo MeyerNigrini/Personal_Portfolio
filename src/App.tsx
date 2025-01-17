@@ -1,11 +1,11 @@
-import { Button } from '@mantine/core';
+import { Route, Routes } from 'react-router-dom';
+import Home from './Home';
 
 function App() {
   return (
-    <div style={{ padding: "20px"}}>
-      <h1> Hello </h1>
-      <Button> Click ME </Button>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home />} />
+    </Routes>
   )
 }
 
