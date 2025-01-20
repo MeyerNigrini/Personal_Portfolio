@@ -1,18 +1,29 @@
-import { Button, Container, Title, Text, Image } from "@mantine/core";
+import { Button, Container, Title, Text, Image, Grid } from "@mantine/core";
+import { HeaderSimple } from "./components/HeaderSimple";
 import myImage from "./assets/ProfilePic.jpg";
 
 function Home(){
     return (
-        <Container>
-            <section style={{display: "flex", alignItems: "center", justifyContent: "space-between" , padding: "50px 50px"}}>
-                <div style = {{textAlign: "left"}}>
-                    <Title> Welcome </Title>
-                    <Text size="lg" mt="sm"> My name is Meyer Nigrini</Text>
-                    <Button>Details</Button>
-                </div>
-                <Image src={myImage} width={200} height={200} style={{borderRadius: "50%", objectFit: "cover"}}/>
-            </section>
-        </Container>
+        <div>
+            <HeaderSimple/>
+            <Container>
+                <Grid align="center" justify="space-between" style={{padding: "10px 0"}}>
+                    <Grid.Col span={{base: 12, xs: 6}} >
+                        <Title order={1}> Hi, I'm Meyer Nigrini </Title>
+                        <Title order={2}>Full-Stack Developer</Title>
+                        <Text size="lg" mt="sm"> Hi, I'm Meyer Nigrini, a full-stack developer with a passion for building innovative digital solutions. I specialize in creating dynamic, responsive web applications that provide great user experiences. Take a look at my work and get in touch if you'd like to collaborate on something exciting.</Text>
+                        <Button>Details</Button>
+                    </Grid.Col>
+                    <Grid.Col span={{base: 12, xs: 6}}>
+                        <Image 
+                            src={myImage} 
+                            radius="50%" 
+                            fit="cover" 
+                            style={{width: "100%", maxWidth: 1000, height: "100%", maxHeight: 1000}}/>
+                    </Grid.Col>    
+                </Grid>
+            </Container>
+        </div>
     )
 }
 
