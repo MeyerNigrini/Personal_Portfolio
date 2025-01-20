@@ -6,10 +6,11 @@ import classes from './HeaderSimple.module.css'; // Import custom CSS styling fo
 
 // Defining an array of links, each having a label and a URL to link to
 const links = [
-  { link: '/details', label: 'Home' },
+  { link: '/', label: 'Home' },
+  { link: '/details', label: 'Details' },
   { link: '/hobbies', label: 'Hobbies' },
-  { link: '/cv', label: 'CV' },
-  { link: '/contact', label: 'Contact Me' },
+  { link: '/cv', label: 'CV'},
+  { link: '/contactme', label: 'Contact Me' },
 ];
 
 export function HeaderSimple() {
@@ -26,9 +27,9 @@ export function HeaderSimple() {
       to={link.link} // 'to' prop defines where the link should navigate to
       className={classes.link} // Apply the custom CSS class for styling the link
       data-active={active === link.link || undefined} // Add 'data-active' attribute to the link if it is the active one (for styling)
-      onClick={(event) => { // Click event handle
-        event.preventDefault(); // Prevent the default behavior of the link which would be a 'page refresh'
+      onClick={() => { // Click event handle
         setActive(link.link); // Update the state to mark the clicked link as active, causing a 're-render'
+        console.log(`Navigating to ${link.link}`); // Debugging line
       }}
     >
       {link.label} {/* Display the label of the link */}

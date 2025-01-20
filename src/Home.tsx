@@ -1,11 +1,11 @@
 import { Button, Container, Title, Text, Image, Grid } from "@mantine/core";
-import { HeaderSimple } from "./components/HeaderSimple";
+
 import myImage from "./assets/ProfilePic.jpg";
 
 function Home(){
     return (
         <div>
-            <HeaderSimple/>
+    
             <Container>
                 <Grid align="center" justify="space-between" style={{padding: "10px 0"}}>
                     <Grid.Col span={{base: 12, xs: 6}} >
