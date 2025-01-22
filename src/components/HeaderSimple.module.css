@@ -1,4 +1,5 @@
 .header {
+    position: relative;
     height: 56px;
     margin-bottom: 60px;
     background-color: var(--mantine-color-body);
@@ -26,4 +27,21 @@
       background-color: var(--mantine-color-blue-filled);
       color: var(--mantine-color-white);
     }
+  }
+
+  .link[data-active] {
+    background-color: var(--mantine-color-blue-filled);
+    color: var(--mantine-color-white);
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--mantine-color-body);
+    z-index: 1000;
+    padding: 16px;
+    border-radius: var(--mantine-radius-sm);
+    box-shadow: var(--mantine-shadow-sm); /* Optional: Add a shadow for better visibility */
   }

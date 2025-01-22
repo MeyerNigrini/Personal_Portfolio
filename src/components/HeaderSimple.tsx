@@ -1,7 +1,7 @@
 import { useState } from 'react'; // useState is a React hook to manage stare
-import { Burger, Container, Group } from '@mantine/core'; // Mantine UI components
+import { Burger, Container, Group, Transition, Paper, Stack } from '@mantine/core'; // Mantine UI components
 import { useDisclosure } from '@mantine/hooks'; // useDisclosure is a hook from Mantine to toggle visibility
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import classes from './HeaderSimple.module.css'; // Import custom CSS styling for the Header component
 
 // Defining an array of links, each having a label and a URL to link to
@@ -17,8 +17,10 @@ export function HeaderSimple() {
   // useDisclosure is a hook from Mantine to manage the state of the burger menu (opened or closed)
   const [opened, { toggle }] = useDisclosure(false); // 'opened' is the boolean state and 'toggle' is a function to change the state.
   
+  // Make use of useLocation Hook to get the current URL
+  const location = useLocation();
   // State to track which link is currently active (clicked)
-  const [active, setActive] = useState(links[0].link); // Default active link is the first one in the array
+  const [active, setActive] = useState(location.pathname); // Set the active link to the current URL path, ensuring on reload that the correct Header link is active
 
   // Create a list of Link components for navigation
   const items = links.map((link) => (
@@ -45,6 +47,18 @@ export function HeaderSimple() {
 
         {/* Burger component is a mobile menu toggle that shows/hides the header meny */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+        <Transition
+          mounted={opened}
+          transition="pop-top-right"
+          duration={200}
+          timingFunction="ease"
+        >
+          {(styles) => (
+            <Paper style={styles} className={classes.dropdown}>
+              <Stack gap={10}>{items}</Stack>
+            </Paper>
+          )}
+        </Transition>
       </Container>
     </header>
   );

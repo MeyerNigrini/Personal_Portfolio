@@ -50,7 +50,7 @@ function Home(){
                     <Grid.Col span={{base: 12, xs: 6}}>
                         <Image 
                             src={myImage} 
-                            
+                           
                             radius="50%" 
                             
                             style={{width: "100%", maxWidth: 1000, height: "100%", maxHeight: 1000}}/>
