@@ -23,7 +23,7 @@ function ContactMe(){
         // Success notification
         setNotification({ visible: true, message: 'Thank you for your message! I will get back to you soon.' });
       } else {
-        // Error notification if any field is empty
+        // Error notification if any field is empty.
         setNotification({ visible: true, message: 'Please fill out all fields.' });
       }
     };

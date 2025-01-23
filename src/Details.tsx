@@ -1,6 +1,7 @@
 import { Title, Container, Grid, SimpleGrid, Table } from '@mantine/core';
 import { AccordionComponent } from './components/Accordion';
 
+// Education data array
 const education = [
   {
     id: 'eduvos',
@@ -18,6 +19,7 @@ const education = [
   },
 ];
 
+// Work experience data array
 const experience = [
   {
     id: 'nebula',
@@ -45,7 +47,7 @@ const experience = [
 
 function Details() {
   
-
+  // Personal information table data
   const info = [
     ['Full Name:', 'Meyer Hendrik Nigrini'],
     ['Date of Birth:', '29 August 2001'],
@@ -59,6 +61,7 @@ function Details() {
     ['Languages:', 'Afrikaans, English'],
   ];
 
+  // Technical skills table data
   const skills = [
     ['Programming Languages:', 'JavaScript, TypeScript, Python, Java.'],
     ['Frontend Development:', 'HTML, CSS, React, Tailwind CSS.'],
@@ -68,29 +71,33 @@ function Details() {
 
   return (
     <Container my="md" size="lg">
-      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md"> {/* Responsive grid with 1 column on small screens, 2 on larger */}
         <div style={{textAlign:"left"}}>
           <Title order={1} style={{textDecoration:"underline", paddingBottom:"15px"}}>Personal Info:</Title>
 
           <Table style={{fontSize:"20px"}}>
             <tbody>
-              {info.map((row, index) => (
+              {info.map((row, index) => ( // Map through personal info array
                 <tr key={index}>
-                  <td style={{fontWeight:"bold"}}>{row[0]}</td>
+                  <td style={{fontWeight:"bold"}}>{row[0]}</td> {/* Label in bold */}
                   <td>{row[1]}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </div>
+
+        {/* Skills and Accordion Section */}
         <Grid gutter="md">
+          
+          {/* Skills Table */}
           <Grid.Col>
             <div>
               <Title order={2} style={{textAlign:"center", textDecoration:"underline"}}>Technical Skills:</Title>
 
               <Table style={{fontSize:"18px"}}>
                 <tbody>
-                  {skills.map((row, index) => (
+                  {skills.map((row, index) => ( // Map through skills array
                     <tr key={index}>
                       <td style={{fontWeight:"bold"}}>{row[0]}</td>
                       <td>{row[1]}</td>
@@ -99,35 +106,26 @@ function Details() {
                 </tbody>
               </Table>
             </div>
-            
           </Grid.Col>
+
+          {/* Work Experience Accordion */}
           <Grid.Col span={6}>
             <div style={{textAlign:"center", paddingBottom:"10px"}}>
               <Title order={2} style={{textDecoration:"underline"}}> Work Experience </Title>
             </div>
-            <AccordionComponent characters={experience} />
+            <AccordionComponent characters={experience} /> {/* Pass work experience data to Accordion */}
           </Grid.Col>
+
+          {/* Education Accordion */}
           <Grid.Col span={6}>
             <div style={{textAlign:"center", paddingBottom:"10px"}}>
               <Title order={2} style={{textDecoration:"underline"}} > Education </Title>
             </div>
-            <AccordionComponent characters={education} />
+            <AccordionComponent characters={education} /> {/* Pass education data to Accordion */}
           </Grid.Col>
         </Grid>
       </SimpleGrid>
     </Container>
-
-
-    // <div>
-    //   <div style={{textAlign:"center", paddingBottom:"10px"}}>
-    //     <Title order={1} > Work Experience </Title>
-    //   </div>
-    //   <AccordionComponent characters={experience} />
-    //   <div style={{textAlign:"center", padding:"10px"}}>
-    //     <Title order={1} > Education </Title>
-    //   </div>
-    //   <AccordionComponent characters={education} />
-    // </div>
   );
 }
 

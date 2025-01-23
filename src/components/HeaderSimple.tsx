@@ -45,7 +45,7 @@ export function HeaderSimple() {
           {items}
         </Group>
 
-        {/* Burger component is a mobile menu toggle that shows/hides the header meny */}
+        {/* Burger component is a mobile menu toggle that shows/hides the header menu */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
         <Transition
           mounted={opened}
