@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'; // Route and Routes from React Router are used to define the routing structure of the application.
 import { HeaderSimple } from './components/HeaderSimple';
-import Home from './Home'; // Import the Home component, which is needed for defining routes.
-import Hobbies from './Hobbies';
-import Details from './Details';
+import Home from './pages/home/home'; // Import the Home component, which is needed for defining routes.
+import Hobbies from './pages/hobbies/hobbies';
+import Details from './pages/details/details';
 import ContactMe from './ContactMe';
 import CV from './CV';
 
