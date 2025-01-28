@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import { TextInput, Textarea, Button, Group, Container, Title, Notification } from '@mantine/core';
+import { useAppContext } from './contexts/AppContext';
 
 
 function ContactMe(){
-    // State for the user's name input
-    const [name, setName] = useState('');
-
-    // State for the user's email input
-    const [email, setEmail] = useState('');
-
-    // State for the user's message input
-    const [message, setMessage] = useState('');
+    // Use context to get and set the form values
+    const {name, email, message, setName, setEmail, setMessage} = useAppContext();
 
     // State for the notification, 'notification' holds an object with 'visible' (boolean) and 'message' (string)
     // This state determines if a notification is shown or not and its content 
@@ -49,7 +44,7 @@ function ContactMe(){
           label="Your Name"
           placeholder="John Doe"
           value={name} // Controlled input: This links the textarea value with the state, synching the input with the state.
-          onChange={(e) => setName(e.target.value)} // Updates the state as the user is inputting or changing values
+          onChange={(e) => setName(e.target.value)} // Update context with new name
           mb="sm"
         />
   
@@ -57,7 +52,7 @@ function ContactMe(){
           label="Your Email"
           placeholder="you@example.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)} // Update context with new email
           mb="sm"
         />
   
@@ -65,7 +60,7 @@ function ContactMe(){
           label="Your Message"
           placeholder="Write your message here"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)} // Update contect with new message
           minRows={4}
           mb="sm"
         />

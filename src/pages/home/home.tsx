@@ -3,8 +3,11 @@ import SocialLinks from "./components/SocialLinks";
 import { socialLinks, desc } from "./data";
 import ProfileImage from "./components/ProfileImage";
 import myImage from "../../assets/ProfilePic.jpg"; // Profile Picture asset
+import { useAppContext } from "../../contexts/AppContext";
 
 function Home() {
+  const {name} = useAppContext();
+
   return (
         <Container>
           <Grid
@@ -14,7 +17,8 @@ function Home() {
           >
               {/* Left Column: Text and social media links */}
               <Grid.Col span={{ base: 12, xs: 6 }}>
-                <Title order={1}>Hi, I'm Meyer Nigrini</Title>
+                <Title order={1} style={{paddingBottom: "10px"}}>Welcome {name}</Title>
+                <Title order={1}>I'm Meyer Nigrini</Title>
                 <Title order={2}>Full-Stack Developer</Title>
                 <Text size="lg" mt="sm">
                   {desc}
