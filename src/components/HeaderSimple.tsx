@@ -25,7 +25,7 @@ export function HeaderSimple() {
   // Create a list of Link components for navigation
   const items = links.map((link) => (
     <Link
-      key={link.label} // Use the link's label as a unique key for React to trach the element.
+      key={link.label} // Use the link's label as a unique key for React to track the element.
       to={link.link} // 'to' prop defines where the link should navigate to
       className={classes.link} // Apply the custom CSS class for styling the link
       data-active={active === link.link || undefined} // Add 'data-active' attribute to the link if it is the active one (for styling)
