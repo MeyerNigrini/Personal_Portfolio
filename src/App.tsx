@@ -3,7 +3,7 @@ import { HeaderSimple } from './components/HeaderSimple';
 import Home from './pages/home/home'; // Import the Home component, which is needed for defining routes.
 import Hobbies from './pages/hobbies/hobbies';
 import Details from './pages/details/details';
-import ContactMe from './ContactMe';
+import ContactMe from './pages/contactMe/ContactMe';
 import CV from './CV';
 
 function App() { // Define the app component.

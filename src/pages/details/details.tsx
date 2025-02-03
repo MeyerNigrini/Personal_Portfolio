@@ -2,48 +2,47 @@ import { Container, Grid, SimpleGrid } from "@mantine/core";
 import KeyValueTable from "../../components/KeyValueTable";
 import SectionTitle from "../../components/SectionTitle";
 import { AccordionComponent } from "../../components/Accordion";
-import { useEffect, useState } from "react";
-import api from "../../services/apiService";
-
+import useFetchData from "../../hooks/useFetchData";
+import { Info } from "./models";
 
 function Details() {
 
-  const [details, setDetails] = useState({
+  // Use the custom hook to fetch data from the API endpoint
+  const { data, error } = useFetchData<Info>("/Details", {
     education: [],
     experience: [],
     info: [],
     skills: [],
   });
 
-  useEffect(() => {
-    api.get("/Details") // Adjust the port if needed
-        .then((response) => {
-            setDetails(response.data);  // Axios automatically parses JSON
-        })
-}, []);
+  // Handling error state
+  if (error) {
+    return <div>Error: {error}</div>; // Display error message if the request fails
+  }
+
 
   return (
     <Container my="md" size="lg">
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
         {/* Personal Info Table */}
-        <KeyValueTable data={details.info} title="Personal Info" fontSize="20px"/>
+        <KeyValueTable data={data.info} title="Personal Info" fontSize="20px"/>
 
         <Grid gutter="md">
           <Grid.Col>
             {/* Technical Skills Table */}
-            <KeyValueTable data={details.skills} title="Technical Skills" fontSize="20px" />
+            <KeyValueTable data={data.skills} title="Technical Skills" fontSize="20px" />
           </Grid.Col>
 
           {/* Work Experience Accordion */}
           <Grid.Col span={6}>
             <SectionTitle title="Work Experience" />
-            <AccordionComponent characters={details.experience} />
+            <AccordionComponent characters={data.experience} />
           </Grid.Col>
 
           {/* Education Accordion */}
           <Grid.Col span={6}>
             <SectionTitle title="Education" />
-            <AccordionComponent characters={details.education} />
+            <AccordionComponent characters={data.education} />
           </Grid.Col>
         </Grid>
       </SimpleGrid>

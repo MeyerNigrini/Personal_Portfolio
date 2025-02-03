@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextInput, Textarea, Button, Group, Container, Title, Notification } from '@mantine/core';
-import { useAppContext } from './contexts/AppContext';
-
+import { useAppContext } from '../../contexts/AppContext';
+import api from '../../services/apiService';
 
 function ContactMe(){
     // Use context to get and set the form values
@@ -15,6 +15,14 @@ function ContactMe(){
     const handleSubmit = () => {
       // Check if all fields are filled
       if (name && email && message) {
+        
+        // Send POST request to the backend API
+        api.post('/ContactMe', {
+          name,
+          email,
+          message,
+        });
+        
         // Success notification
         setNotification({ visible: true, message: 'Thank you for your message! I will get back to you soon.' });
       } else {

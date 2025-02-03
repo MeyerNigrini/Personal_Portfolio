@@ -4,21 +4,22 @@ import karateImg from "../../assets/karate.jpg"; // Karate image asset
 import gamingImg from "../../assets/gaming.jpg"; // Gaming image asset
 import SectionTitle from "../../components/SectionTitle";
 
-import { useEffect, useState } from 'react';
-import api from '../../services/apiService';
-import { HobbyData } from "./models";
 
+import { HobbyData } from "./models";
+import useFetchData from "../../hooks/useFetchData";
 
 
 function Hobbies(){
-    const [hobbies, setHobbies] = useState<HobbyData | null>(null);
+      // Use the custom hook to fetch data from the API endpoint
+    const { data, error } = useFetchData<HobbyData>("/Hobbies", {
+        karate: { title: "", paragraph: "", details: [] },
+        gaming: { title: "", paragraph: "", details: [] },
+    });
 
-    useEffect(() => {
-        api.get("/Hobbies") // Adjust the port if needed
-            .then((response) => {
-                setHobbies(response.data);  // Axios automatically parses JSON
-            })
-    }, []);
+    // Handling error state
+    if (error) {
+        return <div>Error: {error}</div>; // Display error message if the request fails
+    }
 
     return (
         <div
@@ -42,16 +43,16 @@ function Hobbies(){
 
                 {/* Karate Description section */}
                 <Grid.Col span={{base: 12, xs: 6}}>
-                    <SectionTitle title={hobbies?.karate.title ?? ""} />
-                    <Text>{hobbies?.karate.paragraph}</Text>
-                    <KeyValueTable data={hobbies?.karate.details ?? []}/>
+                    <SectionTitle title={data?.karate.title ?? ""} />
+                    <Text>{data?.karate.paragraph}</Text>
+                    <KeyValueTable data={data?.karate.details ?? []}/>
                 </Grid.Col>
 
                 {/* Gaming Section - Description */}
                 <Grid.Col span={{base: 12, xs: 6}}> 
-                    <SectionTitle title={hobbies?.gaming.title ?? ""} />
-                    <Text>{hobbies?.gaming.paragraph}</Text>
-                    <KeyValueTable data={hobbies?.gaming.details ?? []}/>
+                    <SectionTitle title={data?.gaming.title ?? ""} />
+                    <Text>{data?.gaming.paragraph}</Text>
+                    <KeyValueTable data={data?.gaming.details ?? []}/>
                 </Grid.Col>
                 
                 <Grid.Col span={{base: 12, xs: 6}} style={{padding:5}}>
