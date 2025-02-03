@@ -1,33 +1,32 @@
 import { useState } from 'react';
-import { TextInput, Textarea, Button, Group, Container, Title, Notification } from '@mantine/core';
+import { TextInput, Textarea, Button, Group, Container, Title } from '@mantine/core';
 import { useAppContext } from '../../contexts/AppContext';
-import api from '../../services/apiService';
+import { validateForm } from './utils/validateForm';
+import NotificationComponent from './components/notificationComponent';
+import { submitContactForm } from './services/contactService';
 
 function ContactMe(){
     // Use context to get and set the form values
     const {name, email, message, setName, setEmail, setMessage} = useAppContext();
 
     // State for the notification, 'notification' holds an object with 'visible' (boolean) and 'message' (string)
-    // This state determines if a notification is shown or not and its content 
-    const [notification, setNotification] = useState<{ visible: boolean, message: string } | null>(null);
-  
+    const [notification, setNotification] = useState<{ visible: boolean; message: string; color: 'green' | 'red' } | null>(null);
+
     // Handles form submission
-    const handleSubmit = () => {
-      // Check if all fields are filled
-      if (name && email && message) {
-        
-        // Send POST request to the backend API
-        api.post('/ContactMe', {
-          name,
-          email,
-          message,
-        });
-        
-        // Success notification
-        setNotification({ visible: true, message: 'Thank you for your message! I will get back to you soon.' });
+    const handleSubmit = async () => {
+      const errorMessage = validateForm(name, email, message);
+      if (errorMessage) {
+        setNotification({ visible: true, message: errorMessage, color: 'red' });
       } else {
-        // Error notification if any field is empty.
-        setNotification({ visible: true, message: 'Please fill out all fields.' });
+        try {
+          await submitContactForm(name, email, message);
+          setNotification({ visible: true, message: 'Thank you for your message! I will get back to you soon.', color: 'green' });
+          setName('');
+          setEmail('');
+          setMessage('');
+        } catch {
+            setNotification({ visible: true, message: 'Something went wrong. Please try again.', color: 'red' });  
+        }
       }
     };
   
@@ -38,15 +37,7 @@ function ContactMe(){
         </Title>
   
         {/* Check if notification is set and visible. If true render <notification> */}
-        {notification && notification.visible && (
-          <Notification
-            title="Message Status"
-            onClose={() => setNotification(null)} // Close notification
-            color={notification.message.includes('Thank you') ? 'green' : 'red'}
-          >
-            {notification.message}
-          </Notification>
-        )}
+        {notification && notification.visible && <NotificationComponent message={notification.message} onClose={() => setNotification(null)} />}
   
         <TextInput
           label="Your Name"

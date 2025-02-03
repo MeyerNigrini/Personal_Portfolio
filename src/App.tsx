@@ -4,7 +4,7 @@ import Home from './pages/home/home'; // Import the Home component, which is nee
 import Hobbies from './pages/hobbies/hobbies';
 import Details from './pages/details/details';
 import ContactMe from './pages/contactMe/ContactMe';
-import CV from './CV';
+import CV from './pages/cv/CV';
 
 function App() { // Define the app component.
   return (
