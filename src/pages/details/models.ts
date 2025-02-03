@@ -6,4 +6,5 @@ export interface AccordionData {
     description: string;
     content: string;
   }
-  
+
+

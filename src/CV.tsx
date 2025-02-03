@@ -11,10 +11,14 @@ interface WeatherForecast {
 }
 
 
+
+
 const CV = () => {
   const [message, setMessage] = useState<KeyValuePair[]>([]); // HelloWorld Controller for Get function
   const [data, setData] = useState<WeatherForecast[]>([]); // WeatherForecast Controller for Get function
   const [newMessage, setNewMessage] = useState<KeyValuePair>({key: "", value: ""}); // For new message form (HelloWorld POST)
+
+
 
   // Fetch message data from /HelloWorld
   useEffect(() => {
@@ -69,12 +73,6 @@ const CV = () => {
   return (
     <div>
       <h1>Message from /HelloWorld:</h1>
-
-      {message.map((item, index) => (
-          <li key={index}>
-            {item.key} - {item.value}
-          </li>
-        ))}
 
       <h1>Message from /WeatherForecast:</h1>
       {data.map((item, index) => (

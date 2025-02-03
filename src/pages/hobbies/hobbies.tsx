@@ -1,11 +1,25 @@
 import KeyValueTable from "../../components/KeyValueTable";
-import { karate, gaming, karatePar, gamingPar } from "./data";
 import { Grid, Image, Text } from '@mantine/core';
 import karateImg from "../../assets/karate.jpg"; // Karate image asset
 import gamingImg from "../../assets/gaming.jpg"; // Gaming image asset
 import SectionTitle from "../../components/SectionTitle";
 
+import { useEffect, useState } from 'react';
+import api from '../../services/apiService';
+import { HobbyData } from "./models";
+
+
+
 function Hobbies(){
+    const [hobbies, setHobbies] = useState<HobbyData | null>(null);
+
+    useEffect(() => {
+        api.get("/Hobbies") // Adjust the port if needed
+            .then((response) => {
+                setHobbies(response.data);  // Axios automatically parses JSON
+            })
+    }, []);
+
     return (
         <div
         style={{
@@ -28,16 +42,16 @@ function Hobbies(){
 
                 {/* Karate Description section */}
                 <Grid.Col span={{base: 12, xs: 6}}>
-                    <SectionTitle title="Karate" />
-                    <Text>{karatePar}</Text>
-                    <KeyValueTable data={karate}/>
+                    <SectionTitle title={hobbies?.karate.title ?? ""} />
+                    <Text>{hobbies?.karate.paragraph}</Text>
+                    <KeyValueTable data={hobbies?.karate.details ?? []}/>
                 </Grid.Col>
 
                 {/* Gaming Section - Description */}
                 <Grid.Col span={{base: 12, xs: 6}}> 
-                    <SectionTitle title="Gaming" />
-                    <Text>{gamingPar}</Text>
-                    <KeyValueTable data={gaming}/>
+                    <SectionTitle title={hobbies?.gaming.title ?? ""} />
+                    <Text>{hobbies?.gaming.paragraph}</Text>
+                    <KeyValueTable data={hobbies?.gaming.details ?? []}/>
                 </Grid.Col>
                 
                 <Grid.Col span={{base: 12, xs: 6}} style={{padding:5}}>
