@@ -1,6 +1,9 @@
 export interface Info {
-  education: [],
-  experience: [],
   info: [],
   skills: [],
+}
+
+export interface accordionData {
+  education: [],
+  experience: [],
 }

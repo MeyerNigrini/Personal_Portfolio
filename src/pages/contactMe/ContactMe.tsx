@@ -41,7 +41,7 @@ function ContactMe(){
   
         <TextInput
           label="Your Name"
-          placeholder="John Doe"
+          placeholder="John Dory"
           value={name} // Controlled input: This links the textarea value with the state, synching the input with the state.
           onChange={(e) => setName(e.target.value)} // Update context with new name
           mb="sm"
